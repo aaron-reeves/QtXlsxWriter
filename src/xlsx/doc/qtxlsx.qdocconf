@@ -1,5 +1,5 @@
-include($QT_INSTALL_DOCS/global/qt-html-templates-offline.qdocconf)
-include($QT_INSTALL_DOCS/global/qt-module-defaults.qdocconf)
+include(C:/Qt/Qt5.2.1/5.2.1/Src/qtbase/doc/global/qt-html-templates-offline.qdocconf)
+include(C:/Qt/Qt5.2.1/5.2.1/Src/qtbase/doc/global/qt-module-defaults.qdocconf)
 
 project                 = QtXlsx
 description             = Qt Xlsx Reference Documentation

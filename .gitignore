@@ -43,3 +43,9 @@ lib/*
 
 *.zip
 *.xlsx
+/doc
+/include
+/mkspecs
+
+/src/xlsx/object_script.Qt0Xlsx.Release
+/src/xlsx/object_script.Qt0Xlsxd.Debug
