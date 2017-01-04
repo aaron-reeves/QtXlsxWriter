@@ -53,3 +53,6 @@ lib/*
 /lib
 /src/xlsx/.pch
 /src/xlsx/qdoc_wrapper.sh
+/.qmake.stash
+/src/xlsx/object_script.Qt5Xlsx.Release
+/src/xlsx/object_script.Qt5Xlsxd.Debug
