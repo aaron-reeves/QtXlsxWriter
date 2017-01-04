@@ -1,5 +1,7 @@
 TARGET = QtXlsx
 
+QT += compress
+
 QMAKE_DOCS = $$PWD/doc/qtxlsx.qdocconf
 
 load(qt_module)

@@ -25,7 +25,7 @@
 
 #include "xlsxzipreader_p.h"
 
-#include <private/qzipreader_p.h>
+#include <QtCompress/QZipReader>
 
 namespace QXlsx {
 
