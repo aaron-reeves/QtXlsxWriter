@@ -49,3 +49,7 @@ lib/*
 
 /src/xlsx/object_script.Qt0Xlsx.Release
 /src/xlsx/object_script.Qt0Xlsxd.Debug
+/build-src-Desktop_Qt_5_7_1_MinGW_32bit-Debug
+/lib
+/src/xlsx/.pch
+/src/xlsx/qdoc_wrapper.sh
