@@ -40,13 +40,11 @@ lib/*
 *.idb
 *.ncb
 *.suo
-
 *.zip
 *.xlsx
 /doc
 /include
 /mkspecs
-
 /src/xlsx/object_script.Qt0Xlsx.Release
 /src/xlsx/object_script.Qt0Xlsxd.Debug
 /build-src-Desktop_Qt_5_7_1_MinGW_32bit-Debug
