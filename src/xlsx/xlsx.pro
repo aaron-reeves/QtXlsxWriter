@@ -1,13 +1,13 @@
 TARGET = QtXlsx
 
-QT += compress
-
 QMAKE_DOCS = $$PWD/doc/qtxlsx.qdocconf
 
 load(qt_module)
 
 CONFIG += build_xlsx_lib
 include(qtxlsx.pri)
+include(../3rdparty/compress/qcompress.pri)
+include(../3rdparty/zlib/zlib.pri)
 
 #Define this macro if you want to run tests, so more AIPs will get exported.
 #DEFINES += XLSX_TEST

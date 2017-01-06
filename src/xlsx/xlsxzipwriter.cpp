@@ -24,7 +24,7 @@
 ****************************************************************************/
 #include "xlsxzipwriter_p.h"
 #include <QDebug>
-#include <QtCompress/QZipWriter>
+#include "qzipwriter.h"
 
 namespace QXlsx {
 
