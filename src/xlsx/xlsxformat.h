@@ -136,10 +136,10 @@ public:
     enum CustomFlags
     {
         FlagNone       = 0,
-        FlagBold       = 1 << 1,
-        FlagItalic     = 1 << 2,
-        FlagTextWrap   = 1 << 3,
-        FlagBorderThin = 1 << 4
+        FlagBorderThin = 1 << 1,
+        FlagBold       = 1 << 2,
+        FlagItalic     = 1 << 3,
+        FlagTextWrap   = 1 << 4
     };
 
     Format();
