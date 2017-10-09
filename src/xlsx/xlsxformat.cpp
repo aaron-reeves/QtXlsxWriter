@@ -1419,187 +1419,119 @@ QColor Format::colorProperty(int propertyId, const QColor &defaultValue) const
     return qvariant_cast<XlsxColor>(prop).rgbColor();
 }
 
-/*!		
-  * \brief Format::custom		
-  * \param border		
-  * \param bold		
-  * \param italic		
-  * \return		
-  */		
- Format Format::custom(bool border, bool bold, bool italic)		
- {		
-     Format format;		
-     format.setFontBold(bold);		
-     format.setFontItalic(italic);		
-     if (border) {		
-         format.setBorderStyle(BorderThin);		
-     }		
-     return format;		
- }		
- 		
- /*!		
-  * \brief custom		
-  * \param num		
-  * \param border		
-  * \param bold		
-  * \param italic		
-  * \return		
-  */		
- Format Format::custom(const QString& num, bool border, bool bold, bool italic)		
- {		
-     Format format;		
-     format.setFontBold(bold);		
-     format.setFontItalic(italic);		
-     if (border) {		
-         format.setBorderStyle(BorderThin);		
-     }		
-     format.setNumberFormat(num);		
-     return format;		
- }		
- 		
- /*!		
-  * \brief custom		
-  * \param back		
-  * \param border		
-  * \param bold		
-  * \param italic		
-  * \return		
-  */		
- Format Format::custom(const QColor& back, bool border, bool bold, bool italic)		
- {		
-     Format format;		
-     format.setFontBold(bold);		
-     format.setFontItalic(italic);		
-     if (border) {		
-         format.setBorderStyle(BorderThin);		
-     }		
-     format.setPatternBackgroundColor(back);		
-     return format;		
- }		
- 		
- /*!		
-  * \brief custom		
-  * \param back		
-  * \param num		
-  * \param border		
-  * \param bold		
-  * \param italic		
-  * \return		
-  */		
- Format Format::custom(const QColor& back, const QString& num, bool border, bool bold, bool italic)		
- {		
-     Format format;		
-     format.setFontBold(bold);		
-     format.setFontItalic(italic);		
-     if (border) {		
-         format.setBorderStyle(BorderThin);		
-     }		
-     format.setNumberFormat(num);		
-     format.setPatternBackgroundColor(back);		
-     return format;		
- }		
- 		
- /*!		
-  * \brief Format::custom		
-  * \param align		
-  * \param border		
-  * \param bold		
-  * \param italic		
-  * \return		
-  */		
- Format Format::custom(HorizontalAlignment align, bool border, bool bold, bool italic)		
- {		
-     Format format;		
-     format.setFontBold(bold);		
-     format.setFontItalic(italic);		
-     if (border) {		
-         format.setBorderStyle(BorderThin);		
-     }		
-     format.setHorizontalAlignment(align);		
-     return format;		
- }		
- 		
- /*!		
-  * \brief Format::custom		
-  * \param align		
-  * \param num		
-  * \param border		
-  * \param bold		
-  * \param italic		
-  * \return		
-  */		
- Format Format::custom(HorizontalAlignment align, const QString& num, bool border, bool bold, bool italic)		
- {		
-     Format format;		
-     format.setFontBold(bold);		
-     format.setFontItalic(italic);		
-     if (border) {		
-         format.setBorderStyle(BorderThin);		
-     }		
-     format.setNumberFormat(num);		
-     format.setHorizontalAlignment(align);		
-     return format;		
- }		
- 		
- /*!		
-  * \brief Format::custom		
-  * \param align		
-  * \param back		
-  * \param border		
-  * \param bold		
-  * \param italic		
-  * \return		
-  */		
- Format Format::custom(HorizontalAlignment align, const QColor& back, bool border, bool bold, bool italic)		
- {		
-     Format format;		
-     format.setFontBold(bold);		
-     format.setFontItalic(italic);		
-     if (border) {		
-         format.setBorderStyle(BorderThin);		
-     }		
-     format.setPatternBackgroundColor(back);		
-     format.setHorizontalAlignment(align);		
-     return format;		
- }		
- 		
- /*!		
-  * \brief Format::custom		
-  * \param align		
-  * \param back		
-  * \param num		
-  * \param border		
-  * \param bold		
-  * \param italic		
-  * \return		
-  */		
- Format Format::custom(HorizontalAlignment align, const QColor& back, const QString& num, bool border, bool bold, bool italic)		
- {		
-     Format format;		
-     format.setFontBold(bold);		
-     format.setFontItalic(italic);		
-     if (border) {		
-         format.setBorderStyle(BorderThin);		
-     }		
-     format.setNumberFormat(num);		
-     format.setPatternBackgroundColor(back);		
-     format.setHorizontalAlignment(align);		
-     return format;		
- }		
- 		
- /*!		
-  * \brief Format::customWrap		
-  * \param format		
-  * \param wrap		
-  * \return		
-  */		
- Format Format::customWrap(const Format &format, bool wrap)		
- {		
-     Format result(format);		
-     result.setTextWarp(wrap);		
-     return result;		
- }
- 
+/*!
+ * \brief Format::custom
+ * \param flags
+ * \return
+ */
+Format Format::custom(CustomFlags flags)
+{
+    Format format;
+    format.setFontBold(flags & FlagBold);
+    format.setFontItalic(flags & FlagItalic);
+    format.setTextWarp(flags & FlagTextWrap);
+    if (flags & FlagBorderThin) {
+        format.setBorderStyle(BorderThin);
+    }
+    return format;
+}
+
+/*!
+ * \brief custom
+ * \param num
+ * \param flags
+ * \return
+ */
+Format Format::custom(const QString& num, CustomFlags flags)
+{
+    Format format = Format::custom(flags);
+    format.setNumberFormat(num);
+    return format;
+}
+
+/*!
+ * \brief custom
+ * \param back
+ * \param flags
+ * \return
+ */
+Format Format::custom(const QColor& back, CustomFlags flags)
+{
+    Format format = Format::custom(flags);
+    format.setPatternBackgroundColor(back);
+    return format;
+}
+
+/*!
+ * \brief custom
+ * \param back
+ * \param num
+ * \param flags
+ * \return
+ */
+Format Format::custom(const QColor& back, const QString& num, CustomFlags flags)
+{
+    Format format = Format::custom(num, flags);
+    format.setPatternBackgroundColor(back);
+    return format;
+}
+
+/*!
+ * \brief Format::custom
+ * \param align
+ * \param flags
+ * \return
+ */
+Format Format::custom(HorizontalAlignment align, CustomFlags flags)
+{
+    Format format = Format::custom(flags);
+    format.setHorizontalAlignment(align);
+    return format;
+}
+
+/*!
+ * \brief Format::custom
+ * \param align
+ * \param num
+ * \param flags
+ * \return
+ */
+Format Format::custom(HorizontalAlignment align, const QString& num, CustomFlags flags)
+{
+    Format format = Format::custom(num, flags);
+    format.setHorizontalAlignment(align);
+    return format;
+}
+
+/*!
+ * \brief Format::custom
+ * \param align
+ * \param back
+ * \param flags
+ * \return
+ */
+Format Format::custom(HorizontalAlignment align, const QColor& back, CustomFlags flags)
+{
+    Format format = Format::custom(back, flags);
+    format.setHorizontalAlignment(align);
+    return format;
+}
+
+/*!
+ * \brief Format::custom
+ * \param align
+ * \param back
+ * \param num
+ * \param flags
+ * \return
+ */
+Format Format::custom(HorizontalAlignment align, const QColor& back, const QString& num, CustomFlags flags)
+{
+    Format format = Format::custom(back, num, flags);
+    format.setHorizontalAlignment(align);
+    return format;
+}
+
 #ifndef QT_NO_DEBUG_STREAM
 QDebug operator<<(QDebug dbg, const Format &f)
 {
