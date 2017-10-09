@@ -133,6 +133,15 @@ public:
         PatternLightGrid
     };
 
+    enum CustomFlags
+    {
+        FlagNone       = 0,
+        FlagBold       = 1 << 1,
+        FlagItalic     = 1 << 2,
+        FlagTextWrap   = 1 << 3,
+        FlagBorderThin = 1 << 4
+    };
+
     Format();
     Format(const Format &other);
     Format &operator=(const Format &rhs);
@@ -264,16 +273,14 @@ public:
     void setXfIndex(int index);
     void setDxfIndex(int index);
     
-    static Format custom(bool border = false, bool bold = false, bool italic = false);
-    static Format custom(const QString& num, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(const QColor& back, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(const QColor& back, const QString& num, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(HorizontalAlignment align, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(HorizontalAlignment align, const QString& num, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(HorizontalAlignment align, const QColor& back, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(HorizontalAlignment align, const QColor& back, const QString& num, bool border = false, bool bold = false, bool italic = false);
-
-    static Format customWrap(const Format &format, bool wrap);
+    static Format custom(CustomFlags flags = FlagNone);
+    static Format custom(const QString& num, CustomFlags flags = FlagNone);
+    static Format custom(const QColor& back, CustomFlags flags = FlagNone);
+    static Format custom(const QColor& back, const QString& num, CustomFlags flags = FlagNone);
+    static Format custom(HorizontalAlignment align, CustomFlags flags = FlagNone);
+    static Format custom(HorizontalAlignment align, const QString& num, CustomFlags flags = FlagNone);
+    static Format custom(HorizontalAlignment align, const QColor& back, CustomFlags flags = FlagNone);
+    static Format custom(HorizontalAlignment align, const QColor& back, const QString& num, CustomFlags flags = FlagNone);
 
 private:
     friend class Styles;
