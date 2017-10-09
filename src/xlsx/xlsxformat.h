@@ -294,6 +294,12 @@ private:
     QExplicitlySharedDataPointer<FormatPrivate> d;
 };
 
+inline Format::CustomFlags operator |(Format::CustomFlags a, Format::CustomFlags b)
+{
+    typedef std::underlying_type<Format::CustomFlags>::type flag;
+    return Format::CustomFlags(static_cast<flag>(a) | static_cast<flag>(b));
+}
+
 #ifndef QT_NO_DEBUG_STREAM
 Q_XLSX_EXPORT QDebug operator<<(QDebug dbg, const Format &f);
 #endif
