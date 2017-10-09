@@ -282,6 +282,8 @@ public:
     static Format custom(HorizontalAlignment align, const QColor& back, CustomFlags flags = FlagNone);
     static Format custom(HorizontalAlignment align, const QColor& back, const QString& num, CustomFlags flags = FlagNone);
 
+    static Format customWrap(const Format& format, bool wrap);
+
 private:
     friend class Styles;
     friend class ::FormatTest;
