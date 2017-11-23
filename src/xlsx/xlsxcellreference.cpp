@@ -156,7 +156,7 @@ QString CellReference::toString(bool row_abs, bool col_abs) const
 
     QString cell_str;
     if (!_sheet.isEmpty())
-        cell_str.append(QString("'%1'!").arg(_sheet));
+        cell_str.append(QString("'%1'!").arg(_sheet)); // TODO [-Wdeprecated-declarations] : Use fromUtf8, QStringLiteral, or QLatin1String
     if (col_abs)
         cell_str.append(QLatin1Char('$'));
     cell_str.append(col_to_name(_column));
