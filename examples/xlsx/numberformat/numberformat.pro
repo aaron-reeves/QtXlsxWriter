@@ -4,7 +4,7 @@ TARGET = mergecells
 QT += xlsx
 
 TARGET = numberformat
-CONFIG   += console
+CONFIG   += console install_ok
 CONFIG   -= app_bundle
 
 TEMPLATE = app

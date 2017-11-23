@@ -80,7 +80,7 @@ Qt::ItemFlags SheetModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
         return Qt::NoItemFlags;
-    return Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable;
+    return Qt::ItemFlags(Qt::ItemIsSelectable | Qt::ItemIsEnabled | Qt::ItemIsEditable);
 }
 
 QVariant SheetModel::data(const QModelIndex &index, int role) const
