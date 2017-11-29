@@ -33,7 +33,7 @@ Formula::Formula()
 {
 }
 
-Formula::Formula(const Formula & formula)
+Formula::Formula(const Formula& formula)
     : m_formula(formula.toString())
 {
 }
@@ -60,6 +60,21 @@ Formula Formula::COUNTIF(const CellRange& range, const QString& condition)
 Formula Formula::COUNTIF(const CellRange& range, const CellReference& cell)
 {
     return Formula("COUNTIF(" + range.toString() + ", " + cell.toString() + ")");
+}
+
+Formula Formula::IF(const QString& condition, const QString& ifTrue, const QString& ifFalse)
+{
+    return Formula("IF(" + condition + ", " + ifTrue + ", " + ifFalse + ")");
+}
+
+Formula Formula::MAX(const CellRange& range)
+{
+    return Formula("MAX(" + range.toString() + ")");
+}
+
+Formula Formula::MIN(const CellRange& range)
+{
+    return Formula("MIN(" + range.toString() + ")");
 }
 
 Formula Formula::PRODUCT(const CellRange& range)

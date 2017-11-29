@@ -51,6 +51,9 @@ public:
 
     static Formula COUNTIF(const CellRange& range, const QString& condition);
     static Formula COUNTIF(const CellRange& range, const CellReference& cell);
+    static Formula IF(const QString& condition, const QString& ifTrue, const QString& ifFalse);
+    static Formula MAX(const CellRange& range);
+    static Formula MIN(const CellRange& range);
     static Formula PRODUCT(const CellRange& range);
     static Formula SUM(const CellRange& range);
 
