@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef QXLSX_XLSXCELLREFERENCE_H
-#define QXLSX_XLSXCELLREFERENCE_H
+#ifndef QXLSX_CELLREFERENCE_H
+#define QXLSX_CELLREFERENCE_H
 
 #include "xlsxglobal.h"
 
@@ -70,4 +70,4 @@ QT_END_NAMESPACE_XLSX
 
 Q_DECLARE_TYPEINFO(QXlsx::CellReference, Q_MOVABLE_TYPE);
 
-#endif // QXLSX_XLSXCELLREFERENCE_H
+#endif // QXLSX_CELLREFERENCE_H

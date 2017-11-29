@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXWORKBOOK_P_H
-#define XLSXWORKBOOK_P_H
+#ifndef QXLSX_WORKBOOK_P_H
+#define QXLSX_WORKBOOK_P_H
 
 //
 //  W A R N I N G
@@ -102,6 +102,6 @@ public:
     int last_sheet_id;
 };
 
-}
+} // namespace QXlsx
 
-#endif // XLSXWORKBOOK_P_H
+#endif // QXLSX_WORKBOOK_P_H

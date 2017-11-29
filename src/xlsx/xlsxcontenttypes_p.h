@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXCONTENTTYPES_H
-#define XLSXCONTENTTYPES_H
+#ifndef QXLSX_CONTENTTYPES_H
+#define QXLSX_CONTENTTYPES_H
 
 //
 //  W A R N I N G
@@ -84,5 +84,6 @@ private:
     QString m_document_prefix;
 };
 
-}
-#endif // XLSXCONTENTTYPES_H
+} // namespace QXlsx
+
+#endif // QXLSX_CONTENTTYPES_H

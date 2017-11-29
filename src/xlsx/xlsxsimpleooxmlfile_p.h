@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXSIMPLEOOXMLFILE_H
-#define XLSXSIMPLEOOXMLFILE_H
+#ifndef QXLSX_SIMPLEOOXMLFILE_H
+#define QXLSX_SIMPLEOOXMLFILE_H
 
 //
 //  W A R N I N G
@@ -55,5 +55,6 @@ public:
     QByteArray xmlData;
 };
 
-}
-#endif // XLSXSIMPLEOOXMLFILE_H
+} // namespace QXlsx
+
+#endif // QXLSX_SIMPLEOOXMLFILE_H

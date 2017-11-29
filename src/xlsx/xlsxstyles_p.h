@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXSTYLES_H
-#define XLSXSTYLES_H
+#ifndef QXLSX_STYLES_H
+#define QXLSX_STYLES_H
 
 //
 //  W A R N I N G
@@ -135,5 +135,6 @@ private:
     bool m_emptyFormatAdded;
 };
 
-}
-#endif // XLSXSTYLES_H
+} // namespace QXlsx
+
+#endif // QXLSX_STYLES_H

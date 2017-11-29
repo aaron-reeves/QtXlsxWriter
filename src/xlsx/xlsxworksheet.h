@@ -22,18 +22,34 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXWORKSHEET_H
-#define XLSXWORKSHEET_H
+#ifndef QXLSX_WORKSHEET_H
+#define QXLSX_WORKSHEET_H
+
+//
+//  W A R N I N G
+//  -------------
+//
+// This file is not part of the Qt Xlsx API.  It exists for the convenience
+// of the Qt Xlsx.  This header file may change from
+// version to version without notice, or even be removed.
+//
+// We mean it.
+//
 
 #include "xlsxabstractsheet.h"
 #include "xlsxcell.h"
+#include "xlsxcellformula.h"
 #include "xlsxcellrange.h"
 #include "xlsxcellreference.h"
+#include "xlsxformat.h"
+#include "xlsxformula.h"
+
 #include <QStringList>
 #include <QMap>
 #include <QVariant>
 #include <QPointF>
 #include <QSharedPointer>
+
 class QIODevice;
 class QDateTime;
 class QUrl;
@@ -47,7 +63,6 @@ class Format;
 class Drawing;
 class DataValidation;
 class ConditionalFormatting;
-class CellRange;
 class RichString;
 class Relationships;
 class Chart;
@@ -69,6 +84,8 @@ public:
     bool writeInlineString(int row, int column, const QString &value, const Format &format=Format());
     bool writeNumeric(const CellReference &row_column, double value, const Format &format=Format());
     bool writeNumeric(int row, int column, double value, const Format &format=Format());
+    bool writeFormula(const CellReference &row_column, const QString &formula, const Format &format=Format(), double result=0);
+    bool writeFormula(const CellReference &row_column, const Formula &formula, const Format &format=Format(), double result=0);
     bool writeFormula(const CellReference &row_column, const CellFormula &formula, const Format &format=Format(), double result=0);
     bool writeFormula(int row, int column, const CellFormula &formula, const Format &format=Format(), double result=0);
     bool writeBlank(const CellReference &row_column, const Format &format=Format());
@@ -155,4 +172,5 @@ private:
 };
 
 QT_END_NAMESPACE_XLSX
-#endif // XLSXWORKSHEET_H
+
+#endif // QXLSX_WORKSHEET_H

@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXWORKBOOK_H
-#define XLSXWORKBOOK_H
+#ifndef QXLSX_WORKBOOK_H
+#define QXLSX_WORKBOOK_H
 
 #include "xlsxglobal.h"
 #include "xlsxabstractooxmlfile.h"
@@ -112,4 +112,4 @@ private:
 
 QT_END_NAMESPACE_XLSX
 
-#endif // XLSXWORKBOOK_H
+#endif // QXLSX_WORKBOOK_H

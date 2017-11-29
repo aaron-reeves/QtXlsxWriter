@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXUTILITY_H
-#define XLSXUTILITY_H
+#ifndef QXLSX_UTILITY_H
+#define QXLSX_UTILITY_H
 
 //
 //  W A R N I N G
@@ -64,5 +64,6 @@ XLSX_AUTOTEST_EXPORT bool isSpaceReserveNeeded(const QString &string);
 
 XLSX_AUTOTEST_EXPORT QString convertSharedFormula(const QString &rootFormula, const CellReference &rootCell, const CellReference &cell);
 
-} //QXlsx
-#endif // XLSXUTILITY_H
+} // namespace QXlsx
+
+#endif // QXLSX_UTILITY_H

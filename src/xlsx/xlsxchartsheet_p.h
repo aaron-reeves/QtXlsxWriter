@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXCHARTSHEET_P_H
-#define XLSXCHARTSHEET_P_H
+#ifndef QXLSX_CHARTSHEET_P_H
+#define QXLSX_CHARTSHEET_P_H
 
 //
 //  W A R N I N G
@@ -52,5 +52,6 @@ public:
     Chart *chart;
 };
 
-}
-#endif // XLSXCHARTSHEET_P_H
+} // namespace QXlsx
+
+#endif // QXLSX_CHARTSHEET_P_H

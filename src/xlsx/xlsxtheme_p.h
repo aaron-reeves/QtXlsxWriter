@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXTHEME_H
-#define XLSXTHEME_H
+#ifndef QXLSX_THEME_H
+#define QXLSX_THEME_H
 
 //
 //  W A R N I N G
@@ -55,5 +55,6 @@ public:
     QByteArray xmlData;
 };
 
-}
-#endif // XLSXTHEME_H
+} // namespace QXlsx
+
+#endif // QXLSX_THEME_H
