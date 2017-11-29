@@ -49,6 +49,10 @@ public:
 
     void clear();
 
+    static Formula AVEDEV(const CellRange& range);
+    static Formula AVERAGE(const CellRange& range);
+    static Formula AVERAGEIF(const CellRange& range, const QString& condition);
+    static Formula COUNT(const CellRange& range);
     static Formula COUNTIF(const CellRange& range, const QString& condition);
     static Formula COUNTIF(const CellRange& range, const CellReference& cell);
     static Formula IF(const QString& condition, const QString& ifTrue, const QString& ifFalse);

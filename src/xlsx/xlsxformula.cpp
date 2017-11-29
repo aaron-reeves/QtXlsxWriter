@@ -52,6 +52,26 @@ void Formula::clear()
     m_formula.clear();
 }
 
+Formula Formula::AVEDEV(const CellRange& range)
+{
+    return Formula("AVEDEV(" + range.toString() + ")");
+}
+
+Formula Formula::AVERAGE(const CellRange& range)
+{
+    return Formula("AVERAGE(" + range.toString() + ")");
+}
+
+Formula Formula::AVERAGEIF(const CellRange& range, const QString& condition)
+{
+    return Formula("AVERAGEIF(" + range.toString() + ", " + condition + ")");
+}
+
+Formula Formula::COUNT(const CellRange& range)
+{
+    return Formula("COUNT(" + range.toString() + ")");
+}
+
 Formula Formula::COUNTIF(const CellRange& range, const QString& condition)
 {
     return Formula("COUNTIF(" + range.toString() + ", " + condition + ")");
