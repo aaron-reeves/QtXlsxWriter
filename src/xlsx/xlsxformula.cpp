@@ -87,6 +87,16 @@ Formula Formula::SUM(const CellRange& range)
     return Formula("SUM(" + range.toString() + ")");
 }
 
+Formula Formula::SUMIF(const CellRange& range, const QString& condition)
+{
+    return Formula("SUMIF(" + range.toString() + ", " + condition + ")");
+}
+
+Formula Formula::SUMPRODUCT(const CellRange& range1, const CellRange& range2)
+{
+    return Formula("SUMPRODUCT(" + range1.toString() + ", " + range2.toString() + ")");
+}
+
 Formula Formula::brace(const Formula& f)
 {
     Formula formula;

@@ -42,7 +42,7 @@ class Q_XLSX_EXPORT Formula
 {
 public:
     Formula();
-    Formula(const Formula & formula);
+    Formula(const Formula& formula);
     ~Formula();
 
     QString toString() const;
@@ -56,6 +56,8 @@ public:
     static Formula MIN(const CellRange& range);
     static Formula PRODUCT(const CellRange& range);
     static Formula SUM(const CellRange& range);
+    static Formula SUMIF(const CellRange& range, const QString& condition);
+    static Formula SUMPRODUCT(const CellRange& range, const CellRange& range2);
 
     static Formula brace(const Formula& formula);
 
