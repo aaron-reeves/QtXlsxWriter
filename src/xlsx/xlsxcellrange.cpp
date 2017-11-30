@@ -44,25 +44,34 @@ QT_BEGIN_NAMESPACE_XLSX
     whose rowCount() and columnCount() are 0.
 */
 CellRange::CellRange()
-    : top(-1), left(-1), bottom(-2), right(-2)
+    : top(-1), left(-1), bottom(-2), right(-2), _sheet()
 {
 }
 
 /*!
     Constructs the range from the given \a top, \a
-    left, \a bottom and \a right rows and columns.
+    left, \a bottom and \a right rows and columns in sheet \a sheet.
 
-    \sa topRow(), leftColumn(), bottomRow(), rightColumn()
+    \sa topRow(), leftColumn(), bottomRow(), rightColumn(), sheet()
 */
-CellRange::CellRange(int top, int left, int bottom, int right)
-    : top(top), left(left), bottom(bottom), right(right)
+CellRange::CellRange(int top, int left, int bottom, int right, const QString &sheet)
+    : top(top), left(left), bottom(bottom), right(right), _sheet(sheet)
 {
 }
 
-CellRange::CellRange(const CellReference &topLeft, const CellReference &bottomRight)
+CellRange::CellRange(const CellReference &topLeft, const CellReference &bottomRight, const QString &sheet)
     : top(topLeft.row()), left(topLeft.column()), 
-      bottom(bottomRight.row()), right(bottomRight.column())
+      bottom(bottomRight.row()), right(bottomRight.column()),
+      _sheet(sheet)
 {
+    if (sheet.isEmpty()) {
+        // get sheet name from cells
+        if (topLeft.sheet() == bottomRight.sheet()) {
+            _sheet = topLeft.sheet();
+        } else {
+            // TODO skip
+        }
+    }
 }
 
 /*!
@@ -85,6 +94,7 @@ CellRange::CellRange(const char *range)
 
 void CellRange::init(const QString &range)
 {
+    // TODO load sheet name
     QStringList rs = range.split(QLatin1Char(':'));
     if (rs.size() == 2) {
         CellReference start(rs[0]);
@@ -107,7 +117,7 @@ void CellRange::init(const QString &range)
     other range.
 */
 CellRange::CellRange(const CellRange &other)
-    : top(other.top), left(other.left), bottom(other.bottom), right(other.right)
+    : top(other.top), left(other.left), bottom(other.bottom), right(other.right), _sheet(other._sheet)
 {
 }
 
@@ -131,14 +141,20 @@ QString CellRange::toString(bool row_abs, bool col_abs) const
         return CellReference(top, left).toString(row_abs, col_abs);
     }
 
+    QString sheet_name;
+    if (!_sheet.isEmpty())
+        sheet_name.append(QString("'%1'!").arg(_sheet)); // TODO [-Wdeprecated-declarations] : Use fromUtf8, QStringLiteral, or QLatin1String
     QString cell_1 = CellReference(top, left).toString(row_abs, col_abs);
     QString cell_2 = CellReference(bottom, right).toString(row_abs, col_abs);
-    return cell_1 + QLatin1String(":") + cell_2;
+    return sheet_name + cell_1 + QLatin1String(":") + cell_2;
 }
 
-QString CellRange::toString(int firstRow, int firstColumn, int lastRow, int lastColumn)
+/*!
+     Convert the range to string notation, such as "A1:B5".
+*/
+QString CellRange::toString(int firstRow, int firstColumn, int lastRow, int lastColumn, const QString &sheet)
 {
-    CellRange cellRange(firstRow, firstColumn, lastRow, lastColumn);
+    CellRange cellRange(firstRow, firstColumn, lastRow, lastColumn, sheet);
     return cellRange.toString();
 }
 
