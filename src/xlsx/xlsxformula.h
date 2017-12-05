@@ -35,11 +35,20 @@
 
 QT_BEGIN_NAMESPACE_XLSX
 
-class CellRange;
-class CellReference;
-
 class Q_XLSX_EXPORT Formula
 {
+    template <class T>
+    static QString listToString(const T& t)
+    {
+        return t.toString();
+    }
+
+    template <class T, class... Args>
+    static QString listToString(const T& t, Args... args)
+    {
+        return t.toString() + ", " + listToString(args...);
+    }
+
 public:
     Formula();
     Formula(const Formula& formula);
@@ -49,19 +58,28 @@ public:
 
     void clear();
 
+    // template functions
+    template <class T, class... Args>
+    static Formula AVERAGE(const T& t, Args... args);
+    template <class T, class... Args>
+    static Formula COUNT(const T& t, Args... args);
+    template <class T, class... Args>
+    static Formula MAX(const T& t, Args... args);
+    template <class T, class... Args>
+    static Formula MIN(const T& t, Args... args);
+    template <class T, class... Args>
+    static Formula PRODUCT(const T& t, Args... args);
+    template <class T, class... Args>
+    static Formula SUM(const T& t, Args... args);
+    template <class T, class... Args>
+    static Formula SUMPRODUCT(const T& t, Args... args);
+
     static Formula AVEDEV(const CellRange& range);
-    static Formula AVERAGE(const CellRange& range);
-    static Formula AVERAGEIF(const CellRange& range, const QString& condition);
-    static Formula COUNT(const CellRange& range);
-    static Formula COUNTIF(const CellRange& range, const QString& condition);
+    static Formula AVERAGEIF(const CellRange& range, const QString& criteria, const CellRange& average_range = CellRange());
+    static Formula COUNTIF(const CellRange& range, const QString& criteria);
     static Formula COUNTIF(const CellRange& range, const CellReference& cell);
-    static Formula IF(const QString& condition, const QString& ifTrue, const QString& ifFalse);
-    static Formula MAX(const CellRange& range);
-    static Formula MIN(const CellRange& range);
-    static Formula PRODUCT(const CellRange& range);
-    static Formula SUM(const CellRange& range);
-    static Formula SUMIF(const CellRange& range, const QString& condition);
-    static Formula SUMPRODUCT(const CellRange& range, const CellRange& range2);
+    static Formula IF(const QString& criteria, const QString& ifTrue, const QString& ifFalse);
+    static Formula SUMIF(const CellRange& range, const QString& criteria, const CellRange& sum_range = CellRange());
 
     static Formula brace(const Formula& formula);
 
@@ -69,19 +87,11 @@ public:
     Formula operator- (const Formula& rhs) const;
     Formula operator* (const Formula& rhs) const;
     Formula operator/ (const Formula& rhs) const;
-    Formula operator+ (const QString& rhs) const;
-    Formula operator- (const QString& rhs) const;
-    Formula operator* (const QString& rhs) const;
-    Formula operator/ (const QString& rhs) const;
 
     Formula& operator+=(const Formula& rhs);
     Formula& operator-=(const Formula& rhs);
     Formula& operator*=(const Formula& rhs);
     Formula& operator/=(const Formula& rhs);
-    Formula& operator+=(const QString& rhs);
-    Formula& operator-=(const QString& rhs);
-    Formula& operator*=(const QString& rhs);
-    Formula& operator/=(const QString& rhs);
 
     bool operator== (const Formula& rhs) const;
     bool operator!= (const Formula& rhs) const;
@@ -94,6 +104,48 @@ private:
 
     QString m_formula;
 };
+
+template <class T, class... Args>
+Formula Formula::AVERAGE(const T& t, Args... args)
+{
+    return Formula("AVERAGE(" + listToString(t, args...) + ")");
+}
+
+template <class T, class... Args>
+Formula Formula::COUNT(const T& t, Args... args)
+{
+    return Formula("COUNT(" + listToString(t, args...) + ")");
+}
+
+template <class T, class... Args>
+Formula Formula::MAX(const T& t, Args... args)
+{
+    return Formula("MAX(" + listToString(t, args...) + ")");
+}
+
+template <class T, class... Args>
+Formula Formula::MIN(const T& t, Args... args)
+{
+    return Formula("MIN(" + listToString(t, args...) + ")");
+}
+
+template <class T, class... Args>
+Formula Formula::PRODUCT(const T& t, Args... args)
+{
+    return Formula("PRODUCT(" + listToString(t, args...) + ")");
+}
+
+template <class T, class... Args>
+Formula Formula::SUM(const T& t, Args... args)
+{
+    return Formula("SUM(" + listToString(t, args...) + ")");
+}
+
+template <class T, class... Args>
+Formula Formula::SUMPRODUCT(const T& t, Args... args)
+{
+    return Formula("SUMPRODUCT(" + listToString(t, args...) + ")");
+}
 
 QT_END_NAMESPACE_XLSX
 

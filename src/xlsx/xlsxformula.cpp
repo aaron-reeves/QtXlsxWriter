@@ -8,7 +8,7 @@
 ** without limitation the rights to use, copy, modify, merge, publish,
 ** distribute, sublicense, and/or sell copies of the Software, and to
 ** permit persons to whom the Software is furnished to do so, subject to
-** the following conditions:
+** the following criterias:
 **
 ** The above copyright notice and this permission notice shall be
 ** included in all copies or substantial portions of the Software.
@@ -24,7 +24,6 @@
 ****************************************************************************/
 
 #include "xlsxformula.h"
-#include <QDebug>
 
 QT_BEGIN_NAMESPACE_XLSX
 
@@ -57,24 +56,14 @@ Formula Formula::AVEDEV(const CellRange& range)
     return Formula("AVEDEV(" + range.toString() + ")");
 }
 
-Formula Formula::AVERAGE(const CellRange& range)
+Formula Formula::AVERAGEIF(const CellRange& range, const QString& criteria, const CellRange& average_range)
 {
-    return Formula("AVERAGE(" + range.toString() + ")");
+    return Formula("AVERAGEIF(" + range.toString() + ", " + criteria + (average_range.isValid() ? (", " + average_range.toString()) : QString()) + ")");
 }
 
-Formula Formula::AVERAGEIF(const CellRange& range, const QString& condition)
+Formula Formula::COUNTIF(const CellRange& range, const QString& criteria)
 {
-    return Formula("AVERAGEIF(" + range.toString() + ", " + condition + ")");
-}
-
-Formula Formula::COUNT(const CellRange& range)
-{
-    return Formula("COUNT(" + range.toString() + ")");
-}
-
-Formula Formula::COUNTIF(const CellRange& range, const QString& condition)
-{
-    return Formula("COUNTIF(" + range.toString() + ", " + condition + ")");
+    return Formula("COUNTIF(" + range.toString() + ", " + criteria + ")");
 }
 
 Formula Formula::COUNTIF(const CellRange& range, const CellReference& cell)
@@ -82,39 +71,14 @@ Formula Formula::COUNTIF(const CellRange& range, const CellReference& cell)
     return Formula("COUNTIF(" + range.toString() + ", " + cell.toString() + ")");
 }
 
-Formula Formula::IF(const QString& condition, const QString& ifTrue, const QString& ifFalse)
+Formula Formula::IF(const QString& criteria, const QString& ifTrue, const QString& ifFalse)
 {
-    return Formula("IF(" + condition + ", " + ifTrue + ", " + ifFalse + ")");
+    return Formula("IF(" + criteria + ", " + ifTrue + ", " + ifFalse + ")");
 }
 
-Formula Formula::MAX(const CellRange& range)
+Formula Formula::SUMIF(const CellRange& range, const QString& criteria, const CellRange& sum_range)
 {
-    return Formula("MAX(" + range.toString() + ")");
-}
-
-Formula Formula::MIN(const CellRange& range)
-{
-    return Formula("MIN(" + range.toString() + ")");
-}
-
-Formula Formula::PRODUCT(const CellRange& range)
-{
-    return Formula("PRODUCT(" + range.toString() + ")");
-}
-
-Formula Formula::SUM(const CellRange& range)
-{
-    return Formula("SUM(" + range.toString() + ")");
-}
-
-Formula Formula::SUMIF(const CellRange& range, const QString& condition)
-{
-    return Formula("SUMIF(" + range.toString() + ", " + condition + ")");
-}
-
-Formula Formula::SUMPRODUCT(const CellRange& range1, const CellRange& range2)
-{
-    return Formula("SUMPRODUCT(" + range1.toString() + ", " + range2.toString() + ")");
+    return Formula("SUMIF(" + range.toString() + ", " + criteria + (sum_range.isValid() ? (", " + sum_range.toString()) : QString()) + ")");
 }
 
 Formula Formula::brace(const Formula& f)
@@ -162,46 +126,6 @@ Formula Formula::operator/ (const Formula& rhs) const
     if (!rhs.toString().isEmpty()) {
         formula.append(QLatin1String(" / "));
         formula.append(rhs.toString());
-    }
-    return formula;
-}
-
-Formula Formula::operator+ (const QString& rhs) const
-{
-    Formula formula(*this);
-    if (!rhs.isEmpty()) {
-        formula.append(QLatin1String(" + "));
-        formula.append(rhs);
-    }
-    return formula;
-}
-
-Formula Formula::operator- (const QString& rhs) const
-{
-    Formula formula(*this);
-    if (!rhs.isEmpty()) {
-        formula.append(QLatin1String(" - "));
-        formula.append(rhs);
-    }
-    return formula;
-}
-
-Formula Formula::operator* (const QString& rhs) const
-{
-    Formula formula(*this);
-    if (!rhs.isEmpty()) {
-        formula.append(QLatin1String(" * "));
-        formula.append(rhs);
-    }
-    return formula;
-}
-
-Formula Formula::operator/ (const QString& rhs) const
-{
-    Formula formula(*this);
-    if (!rhs.isEmpty()) {
-        formula.append(QLatin1String(" / "));
-        formula.append(rhs);
     }
     return formula;
 }
@@ -258,38 +182,6 @@ Formula& Formula::operator/=(const Formula& rhs)
             this->append(QLatin1String(" / "));
             this->append(temp);
         }
-    }
-    return *this;
-}
-
-Formula& Formula::operator+=(const QString& rhs)
-{
-    if (!rhs.isEmpty()) {
-        *this = *this + rhs;
-    }
-    return *this;
-}
-
-Formula& Formula::operator-=(const QString& rhs)
-{
-    if (!rhs.isEmpty()) {
-        *this = *this - rhs;
-    }
-    return *this;
-}
-
-Formula& Formula::operator*=(const QString& rhs)
-{
-    if (!rhs.isEmpty()) {
-        *this = *this * rhs;
-    }
-    return *this;
-}
-
-Formula& Formula::operator/=(const QString& rhs)
-{
-    if (!rhs.isEmpty()) {
-        *this = *this / rhs;
     }
     return *this;
 }
