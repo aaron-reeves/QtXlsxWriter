@@ -22,14 +22,16 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef QXLSX_CELLREFERENCE_H
-#define QXLSX_CELLREFERENCE_H
+#ifndef QXLSX_XLSXCELLREFERENCE_H
+#define QXLSX_XLSXCELLREFERENCE_H
 
 #include "xlsxglobal.h"
 
 #include <QString>
 
 QT_BEGIN_NAMESPACE_XLSX
+
+class Formula;
 
 class Q_XLSX_EXPORT CellReference
 {
@@ -41,6 +43,8 @@ public:
     CellReference(const CellReference &other);
     ~CellReference();
 
+    Formula toFormula() const;
+    static Formula toFormula(int row, int column, const QString &sheet = QString());
     QString toString(bool row_abs=false, bool col_abs=false) const;
     static QString toString(int row, int column, const QString &sheet = QString());
     static CellReference fromString(const QString &cell);
@@ -70,4 +74,4 @@ QT_END_NAMESPACE_XLSX
 
 Q_DECLARE_TYPEINFO(QXlsx::CellReference, Q_MOVABLE_TYPE);
 
-#endif // QXLSX_CELLREFERENCE_H
+#endif // QXLSX_XLSXCELLREFERENCE_H

@@ -37,6 +37,16 @@ Formula::Formula(const Formula& formula)
 {
 }
 
+Formula::Formula(const CellRange& range)
+    : m_formula(range.toString())
+{
+}
+
+Formula::Formula(const CellReference& cell)
+    : m_formula(cell.toString())
+{
+}
+
 Formula::~Formula()
 {
 }

@@ -9,11 +9,13 @@ SUBDIRS = hello \
     numberformat \
     datavalidation \
     definename \
+    formula \
     formulas \
     richtext \
     conditionalformatting \
     worksheetoperations \
     hyperlinks \
+    marker \
     chart \
     chartsheet \
     calendar \

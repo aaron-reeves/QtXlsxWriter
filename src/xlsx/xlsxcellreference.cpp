@@ -23,6 +23,7 @@
 **
 ****************************************************************************/
 #include "xlsxcellreference.h"
+#include "xlsxformula.h"
 #include <QStringList>
 #include <QMap>
 #include <QRegularExpression>
@@ -118,6 +119,7 @@ CellReference::CellReference(const char *cell)
 
 void CellReference::init(const QString &cell_str)
 {
+    // Try this "^'?([A-Za-z0-9._ ]*)'?:?\\$?([A-Z]{1,3})\\$?(\\d+)$"
     static QRegularExpression re(QStringLiteral("^\\$?([A-Z]{1,3})\\$?(\\d+)$"));
     QRegularExpressionMatch match = re.match(cell_str);
     if (match.hasMatch()) {
@@ -145,6 +147,16 @@ CellReference::~CellReference()
 {
 }
 
+Formula CellReference::toFormula() const
+{
+    return Formula(*this);
+}
+
+Formula CellReference::toFormula(int row, int column, const QString &sheet)
+{
+    return CellReference(row, column, sheet).toFormula();
+}
+
 /*!
      Convert the Reference to string notation, such as "A1" or "$A$1".
      If current object is invalid, an empty string will be returned.
@@ -156,7 +168,7 @@ QString CellReference::toString(bool row_abs, bool col_abs) const
 
     QString cell_str;
     if (!_sheet.isEmpty())
-        cell_str.append(QString("'%1'!").arg(_sheet)); // TODO [-Wdeprecated-declarations] : Use fromUtf8, QStringLiteral, or QLatin1String
+        cell_str.append(QStringLiteral("'%1'!").arg(_sheet));
     if (col_abs)
         cell_str.append(QLatin1Char('$'));
     cell_str.append(col_to_name(_column));
@@ -168,8 +180,7 @@ QString CellReference::toString(bool row_abs, bool col_abs) const
 
 QString CellReference::toString(int row, int column, const QString &sheet)
 {
-    CellReference cellRef(row, column, sheet);
-    return cellRef.toString();
+    return CellReference(row, column, sheet).toString();
 }
 
 CellReference CellReference::fromString(const QString &cell)

@@ -22,9 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef QXLSX_CELLRANGE_H
-#define QXLSX_CELLRANGE_H
-
+#ifndef QXLSX_XLSXCELLRANGE_H
+#define QXLSX_XLSXCELLRANGE_H
 #include "xlsxglobal.h"
 #include "xlsxcellreference.h"
 
@@ -32,19 +31,27 @@
 
 QT_BEGIN_NAMESPACE_XLSX
 
+class Formula;
+
 class Q_XLSX_EXPORT CellRange
 {
 public:
     CellRange();
     CellRange(int firstRow, int firstColumn, int lastRow, int lastColumn, const QString &sheet = QString());
-    CellRange(const CellReference &topLeft, const CellReference &bottomRight, const QString &sheet = QString());
+    CellRange(const CellReference &topLeft, const CellReference &bottomRight);
     CellRange(const QString &range);
     CellRange(const char *range);
     CellRange(const CellRange &other);
     ~CellRange();
 
+    Formula toFormula() const;
+    static Formula toFormula(int firstRow, int firstColumn, int lastRow, int lastColumn,
+                             const QString &sheet = QString());
+    static Formula toFormula(const CellReference &topLeft, const CellReference &bottomRight);
     QString toString(bool row_abs=false, bool col_abs=false) const;
-    static QString toString(int firstRow, int firstColumn, int lastRow, int lastColumn, const QString &sheet = QString());
+    static QString toString(int firstRow, int firstColumn, int lastRow, int lastColumn,
+                            const QString &sheet = QString());
+    static QString toString(const CellReference &topLeft, const CellReference &bottomRight);
     bool isValid() const;
     inline void setFirstRow(int row) { top = row; }
     inline void setLastRow(int row) { bottom = row; }
@@ -58,10 +65,10 @@ public:
     inline int rowCount() const { return bottom - top + 1; }
     inline int columnCount() const { return right - left + 1; }
     inline const QString &sheet() const { return _sheet; }
-    inline CellReference topLeft() const { return CellReference(top, left); }
-    inline CellReference topRight() const { return CellReference(top, right); }
-    inline CellReference bottomLeft() const { return CellReference(bottom, left); }
-    inline CellReference bottomRight() const { return CellReference(bottom, right); }
+    inline CellReference topLeft() const { return CellReference(top, left, _sheet); }
+    inline CellReference topRight() const { return CellReference(top, right, _sheet); }
+    inline CellReference bottomLeft() const { return CellReference(bottom, left, _sheet); }
+    inline CellReference bottomRight() const { return CellReference(bottom, right, _sheet); }
 
     inline bool operator ==(const CellRange &other) const
     {
@@ -83,4 +90,4 @@ QT_END_NAMESPACE_XLSX
 
 Q_DECLARE_TYPEINFO(QXlsx::CellRange, Q_MOVABLE_TYPE);
 
-#endif // QXLSX_CELLRANGE_H
+#endif // QXLSX_XLSXCELLRANGE_H

@@ -41,8 +41,8 @@ class Cell;
 class CellRange;
 class DataValidation;
 class ConditionalFormatting;
-class Chart;
 class CellReference;
+class Chart;
 
 class DocumentPrivate;
 class Q_XLSX_EXPORT Document : public QObject

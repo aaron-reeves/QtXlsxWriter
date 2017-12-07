@@ -52,6 +52,8 @@ class Q_XLSX_EXPORT Formula
 public:
     Formula();
     Formula(const Formula& formula);
+    Formula(const CellRange& range);
+    Formula(const CellReference& cell);
     ~Formula();
 
     QString toString() const;
