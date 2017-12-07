@@ -45,12 +45,10 @@ public:
     ~CellRange();
 
     Formula toFormula() const;
-    static Formula toFormula(int firstRow, int firstColumn, int lastRow, int lastColumn,
-                             const QString &sheet = QString());
+    static Formula toFormula(int firstRow, int firstColumn, int lastRow, int lastColumn, const QString &sheet = QString());
     static Formula toFormula(const CellReference &topLeft, const CellReference &bottomRight);
     QString toString(bool row_abs=false, bool col_abs=false) const;
-    static QString toString(int firstRow, int firstColumn, int lastRow, int lastColumn,
-                            const QString &sheet = QString());
+    static QString toString(int firstRow, int firstColumn, int lastRow, int lastColumn, const QString &sheet = QString());
     static QString toString(const CellReference &topLeft, const CellReference &bottomRight);
     bool isValid() const;
     inline void setFirstRow(int row) { top = row; }

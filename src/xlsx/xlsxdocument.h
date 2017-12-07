@@ -43,6 +43,7 @@ class DataValidation;
 class ConditionalFormatting;
 class CellReference;
 class Chart;
+class Validator;
 
 class DocumentPrivate;
 class Q_XLSX_EXPORT Document : public QObject
@@ -61,6 +62,7 @@ public:
     QVariant read(const CellReference &cell) const;
     QVariant read(int row, int col) const;
     bool insertImage(int row, int col, const QImage &image);
+    bool insertValidator(int row, int col, const Validator &val, const Format &format=Format());
     Chart *insertChart(int row, int col, const QSize &size);
     bool mergeCells(const CellRange &range, const Format &format=Format());
     bool unmergeCells(const CellRange &range);

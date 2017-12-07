@@ -66,6 +66,7 @@ class ConditionalFormatting;
 class RichString;
 class Relationships;
 class Chart;
+class Validator;
 
 class WorksheetPrivate;
 class Q_XLSX_EXPORT Worksheet : public AbstractSheet
@@ -108,6 +109,7 @@ public:
 
     bool insertImage(int row, int column, const QImage &image);
     Chart *insertChart(int row, int column, const QSize &size);
+    bool insertValidator(int row, int col, const Validator &val, const Format &format=Format());
 
     bool mergeCells(const CellRange &range, const Format &format=Format());
     bool unmergeCells(const CellRange &range);

@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (c) 2016 Golubchikov Mihail <https://github.com/rue-ryuzaki>
+** Copyright (c) 2016-2017 Golubchikov Mihail <https://github.com/rue-ryuzaki>
 ** All right reserved.
 **
 ** Permission is hereby granted, free of charge, to any person obtaining

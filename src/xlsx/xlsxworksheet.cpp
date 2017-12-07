@@ -36,6 +36,7 @@
 #include "xlsxdrawinganchor_p.h"
 #include "xlsxchart.h"
 #include "xlsxcellformula_p.h"
+#include "xlsxvalidator.h"
 
 #include <QVariant>
 #include <QDateTime>
@@ -1133,6 +1134,19 @@ Chart *Worksheet::insertChart(int row, int column, const QSize &size)
     anchor->setObjectGraphicFrame(chart);
 
     return chart.data();
+}
+
+/*!
+ * Insert a \a validator at the position \a row, \a column with the \a format.
+ * Returns true on success.
+ */
+bool Worksheet::insertValidator(int row, int col, const Validator &val, const Format &format)
+{
+    Q_D(Worksheet);
+
+    // TODO
+
+    return true;
 }
 
 /*!
