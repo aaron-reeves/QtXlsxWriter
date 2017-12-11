@@ -122,7 +122,7 @@ void CellRange::init(const QString &range)
     other range.
 */
 CellRange::CellRange(const CellRange &other)
-    : top(other.top), left(other.left), bottom(other.bottom), right(other.right)
+    : top(other.top), left(other.left), bottom(other.bottom), right(other.right), _sheet(other._sheet)
 {
 }
 
