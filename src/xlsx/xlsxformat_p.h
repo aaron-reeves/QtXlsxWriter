@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXFORMAT_P_H
-#define XLSXFORMAT_P_H
+#ifndef QXLSX_FORMAT_P_H
+#define QXLSX_FORMAT_P_H
 
 //
 //  W A R N I N G
@@ -156,6 +156,6 @@ public:
     QMap<int, QVariant> properties;
 };
 
-}
+} // namespace QXlsx
 
-#endif // XLSXFORMAT_P_H
+#endif // QXLSX_FORMAT_P_H

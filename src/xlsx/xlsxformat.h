@@ -133,6 +133,15 @@ public:
         PatternLightGrid
     };
 
+    enum CustomFlags
+    {
+        FlagNone       = 0,
+        FlagBorderThin = 1 << 1,
+        FlagBold       = 1 << 2,
+        FlagItalic     = 1 << 3,
+        FlagTextWrap   = 1 << 4
+    };
+
     Format();
     Format(const Format &other);
     Format &operator=(const Format &rhs);
@@ -264,16 +273,16 @@ public:
     void setXfIndex(int index);
     void setDxfIndex(int index);
     
-    static Format custom(bool border = false, bool bold = false, bool italic = false);
-    static Format custom(const QString& num, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(const QColor& back, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(const QColor& back, const QString& num, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(HorizontalAlignment align, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(HorizontalAlignment align, const QString& num, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(HorizontalAlignment align, const QColor& back, bool border = false, bool bold = false, bool italic = false);
-    static Format custom(HorizontalAlignment align, const QColor& back, const QString& num, bool border = false, bool bold = false, bool italic = false);
+    static Format custom(CustomFlags flags = FlagNone);
+    static Format custom(const QString& num, CustomFlags flags = FlagNone);
+    static Format custom(const QColor& back, CustomFlags flags = FlagNone);
+    static Format custom(const QColor& back, const QString& num, CustomFlags flags = FlagNone);
+    static Format custom(HorizontalAlignment align, CustomFlags flags = FlagNone);
+    static Format custom(HorizontalAlignment align, const QString& num, CustomFlags flags = FlagNone);
+    static Format custom(HorizontalAlignment align, const QColor& back, CustomFlags flags = FlagNone);
+    static Format custom(HorizontalAlignment align, const QColor& back, const QString& num, CustomFlags flags = FlagNone);
 
-    static Format customWrap(const Format &format, bool wrap);
+    static Format customWrap(const Format& format, bool wrap);
 
 private:
     friend class Styles;
@@ -284,6 +293,12 @@ private:
 
     QExplicitlySharedDataPointer<FormatPrivate> d;
 };
+
+inline Format::CustomFlags operator |(Format::CustomFlags a, Format::CustomFlags b)
+{
+    typedef std::underlying_type<Format::CustomFlags>::type flag;
+    return Format::CustomFlags(static_cast<flag>(a) | static_cast<flag>(b));
+}
 
 #ifndef QT_NO_DEBUG_STREAM
 Q_XLSX_EXPORT QDebug operator<<(QDebug dbg, const Format &f);

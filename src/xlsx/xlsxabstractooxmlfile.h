@@ -23,8 +23,8 @@
 **
 ****************************************************************************/
 
-#ifndef QXLSX_XLSXABSTRACTOOXMLFILE_H
-#define QXLSX_XLSXABSTRACTOOXMLFILE_H
+#ifndef QXLSX_ABSTRACTOOXMLFILE_H
+#define QXLSX_ABSTRACTOOXMLFILE_H
 
 #include "xlsxglobal.h"
 
@@ -67,4 +67,4 @@ protected:
 
 QT_END_NAMESPACE_XLSX
 
-#endif // QXLSX_XLSXABSTRACTOOXMLFILE_H
+#endif // QXLSX_ABSTRACTOOXMLFILE_H

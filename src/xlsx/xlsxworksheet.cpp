@@ -23,24 +23,20 @@
 **
 ****************************************************************************/
 #include "xlsxrichstring.h"
-#include "xlsxcellreference.h"
 #include "xlsxworksheet.h"
 #include "xlsxworksheet_p.h"
 #include "xlsxworkbook.h"
-#include "xlsxformat.h"
 #include "xlsxformat_p.h"
 #include "xlsxutility_p.h"
 #include "xlsxsharedstrings_p.h"
 #include "xlsxdrawing_p.h"
 #include "xlsxstyles_p.h"
-#include "xlsxcell.h"
 #include "xlsxcell_p.h"
-#include "xlsxcellrange.h"
 #include "xlsxconditionalformatting_p.h"
 #include "xlsxdrawinganchor_p.h"
 #include "xlsxchart.h"
-#include "xlsxcellformula.h"
 #include "xlsxcellformula_p.h"
+#include "xlsxvalidator.h"
 
 #include <QVariant>
 #include <QDateTime>
@@ -768,6 +764,32 @@ bool Worksheet::writeNumeric(int row, int column, double value, const Format &fo
     Write \a formula to the cell \a row_column with the \a format and \a result.
     Returns true on success.
  */
+bool Worksheet::writeFormula(const CellReference &row_column, const QString &formula, const Format &format, double result)
+{
+    if (!row_column.isValid())
+        return false;
+
+    return writeFormula(row_column.row(), row_column.column(), CellFormula(formula, row_column.toString(), CellFormula::SharedType), format, result);
+}
+
+/*!
+    \overload
+    Write \a formula to the cell \a row_column with the \a format and \a result.
+    Returns true on success.
+ */
+bool Worksheet::writeFormula(const CellReference &row_column, const Formula &formula, const Format &format, double result)
+{
+    if (!row_column.isValid())
+        return false;
+
+    return writeFormula(row_column.row(), row_column.column(), CellFormula(formula, row_column.toString(), CellFormula::SharedType), format, result);
+}
+
+/*!
+    \overload
+    Write \a formula to the cell \a row_column with the \a format and \a result.
+    Returns true on success.
+ */
 bool Worksheet::writeFormula(const CellReference &row_column, const CellFormula &formula, const Format &format, double result)
 {
     if (!row_column.isValid())
@@ -1112,6 +1134,19 @@ Chart *Worksheet::insertChart(int row, int column, const QSize &size)
     anchor->setObjectGraphicFrame(chart);
 
     return chart.data();
+}
+
+/*!
+ * Insert a \a validator at the position \a row, \a column with the \a format.
+ * Returns true on success.
+ */
+bool Worksheet::insertValidator(int row, int col, const Validator &val, const Format &format)
+{
+    Q_D(Worksheet);
+
+    // TODO
+
+    return true;
 }
 
 /*!

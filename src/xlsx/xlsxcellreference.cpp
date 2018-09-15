@@ -23,6 +23,7 @@
 **
 ****************************************************************************/
 #include "xlsxcellreference.h"
+#include "xlsxformula.h"
 #include <QStringList>
 #include <QMap>
 #include <QRegularExpression>
@@ -86,15 +87,15 @@ int col_from_name(const QString &col_str)
     Constructs an invalid Cell Reference
 */
 CellReference::CellReference()
-    : _row(-1), _column(-1)
+    : _row(-1), _column(-1), _sheet()
 {
 }
 
 /*!
     Constructs the Reference from the given \a row, and \a column.
 */
-CellReference::CellReference(int row, int column)
-    : _row(row), _column(column)
+CellReference::CellReference(int row, int column, const QString &sheet)
+    : _row(row), _column(column), _sheet(sheet)
 {
 }
 
@@ -118,6 +119,7 @@ CellReference::CellReference(const char *cell)
 
 void CellReference::init(const QString &cell_str)
 {
+    // Try this "^'?([A-Za-z0-9._ ]*)'?:?\\$?([A-Z]{1,3})\\$?(\\d+)$"
     static QRegularExpression re(QStringLiteral("^\\$?([A-Z]{1,3})\\$?(\\d+)$"));
     QRegularExpressionMatch match = re.match(cell_str);
     if (match.hasMatch()) {
@@ -125,6 +127,7 @@ void CellReference::init(const QString &cell_str)
         const QString row_str = match.captured(2);
         _row = row_str.toInt();
         _column = col_from_name(col_str);
+        // TODO _sheet
     }
 }
 
@@ -133,7 +136,7 @@ void CellReference::init(const QString &cell_str)
     other Reference.
 */
 CellReference::CellReference(const CellReference &other)
-    : _row(other._row), _column(other._column)
+    : _row(other._row), _column(other._column), _sheet(other._sheet)
 {
 }
 
@@ -142,6 +145,16 @@ CellReference::CellReference(const CellReference &other)
 */
 CellReference::~CellReference()
 {
+}
+
+Formula CellReference::toFormula() const
+{
+    return Formula(*this);
+}
+
+Formula CellReference::toFormula(int row, int column, const QString &sheet)
+{
+    return CellReference(row, column, sheet).toFormula();
 }
 
 /*!
@@ -154,6 +167,8 @@ QString CellReference::toString(bool row_abs, bool col_abs) const
         return QString();
 
     QString cell_str;
+    if (!_sheet.isEmpty())
+        cell_str.append(QStringLiteral("'%1'!").arg(_sheet));
     if (col_abs)
         cell_str.append(QLatin1Char('$'));
     cell_str.append(col_to_name(_column));
@@ -163,10 +178,9 @@ QString CellReference::toString(bool row_abs, bool col_abs) const
     return cell_str;
 }
 
-QString CellReference::toString(int row, int column)
+QString CellReference::toString(int row, int column, const QString &sheet)
 {
-    CellReference cellRef(row, column);
-    return cellRef.toString();
+    return CellReference(row, column, sheet).toString();
 }
 
 CellReference CellReference::fromString(const QString &cell)

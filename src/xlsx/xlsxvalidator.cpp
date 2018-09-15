@@ -1,5 +1,5 @@
 /****************************************************************************
-** Copyright (c) 2013-2014 Debao Zhang <hello@debao.me>
+** Copyright (c) 2017 Golubchikov Mihail <https://github.com/rue-ryuzaki>
 ** All right reserved.
 **
 ** Permission is hereby granted, free of charge, to any person obtaining
@@ -23,47 +23,40 @@
 **
 ****************************************************************************/
 
-#ifndef QXLSX_DATAVALIDATION_P_H
-#define QXLSX_DATAVALIDATION_P_H
-
-//
-//  W A R N I N G
-//  -------------
-//
-// This file is not part of the Qt Xlsx API.  It exists for the convenience
-// of the Qt Xlsx.  This header file may change from
-// version to version without notice, or even be removed.
-//
-// We mean it.
-//
-
-#include "xlsxdatavalidation.h"
-#include <QSharedData>
+#include "xlsxvalidator.h"
+#include "xlsxcellrange.h"
+#include "xlsxcellreference.h"
 
 QT_BEGIN_NAMESPACE_XLSX
 
-class Q_XLSX_EXPORT  DataValidationPrivate : public QSharedData
+void Validator::validateAny()
 {
-public:
-    DataValidationPrivate();
-    DataValidationPrivate(DataValidation::ValidationType type, DataValidation::ValidationOperator op, const QString &formula1, const QString &formula2, bool allowBlank);
-    DataValidationPrivate(const DataValidationPrivate &other);
-    ~DataValidationPrivate();
+    m_type = VT_Any;
+    m_comparator = Comparator();
+}
 
-    DataValidation::ValidationType validationType;
-    DataValidation::ValidationOperator validationOperator;
-    DataValidation::ErrorStyle errorStyle;
-    bool allowBlank;
-    bool isPromptMessageVisible;
-    bool isErrorMessageVisible;
-    QString formula1;
-    QString formula2;
-    QString errorMessage;
-    QString errorMessageTitle;
-    QString promptMessage;
-    QString promptMessageTitle;
-    QList<CellRange> ranges;
-};
+void Validator::validateInteger(const Comparator &comparator)
+{
+    m_type = VT_Integer;
+    m_comparator = comparator;
+}
+
+void Validator::validateDecimal(const Comparator &comparator)
+{
+    m_type = VT_Decimal;
+    m_comparator = comparator;
+}
+
+void Validator::validateDate(const Comparator &comparator)
+{
+    m_type = VT_Date;
+    m_comparator = comparator;
+}
+
+void Validator::validateTime(const Comparator &comparator)
+{
+    m_type = VT_Time;
+    m_comparator = comparator;
+}
 
 QT_END_NAMESPACE_XLSX
-#endif // QXLSX_DATAVALIDATION_P_H

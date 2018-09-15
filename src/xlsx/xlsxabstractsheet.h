@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXABSTRACTSHEET_H
-#define XLSXABSTRACTSHEET_H
+#ifndef QXLSX_ABSTRACTSHEET_H
+#define QXLSX_ABSTRACTSHEET_H
 
 #include "xlsxabstractooxmlfile.h"
 #include <QStringList>
@@ -73,4 +73,5 @@ protected:
 };
 
 QT_END_NAMESPACE_XLSX
-#endif // XLSXABSTRACTSHEET_H
+
+#endif // QXLSX_ABSTRACTSHEET_H

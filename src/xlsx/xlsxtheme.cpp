@@ -234,4 +234,4 @@ bool Theme::loadFromXmlFile(QIODevice *device)
     return true;
 }
 
-}
+} // namespace QXlsx

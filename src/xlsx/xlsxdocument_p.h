@@ -23,8 +23,8 @@
 **
 ****************************************************************************/
 
-#ifndef XLSXDOCUMENT_P_H
-#define XLSXDOCUMENT_P_H
+#ifndef QXLSX_DOCUMENT_P_H
+#define QXLSX_DOCUMENT_P_H
 
 //
 //  W A R N I N G
@@ -64,6 +64,6 @@ public:
     QSharedPointer<ContentTypes> contentTypes;
 };
 
-}
+} // namespace QXlsx
 
-#endif // XLSXDOCUMENT_P_H
+#endif // QXLSX_DOCUMENT_P_H

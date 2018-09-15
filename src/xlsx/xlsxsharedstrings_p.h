@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXSHAREDSTRINGS_H
-#define XLSXSHAREDSTRINGS_H
+#ifndef QXLSX_SHAREDSTRINGS_H
+#define QXLSX_SHAREDSTRINGS_H
 
 //
 //  W A R N I N G
@@ -94,5 +94,6 @@ private:
     int m_stringCount;
 };
 
-}
-#endif // XLSXSHAREDSTRINGS_H
+} // namespace QXlsx
+
+#endif // QXLSX_SHAREDSTRINGS_H

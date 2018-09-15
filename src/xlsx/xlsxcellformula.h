@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef QXLSX_XLSXCELLFORMULA_H
-#define QXLSX_XLSXCELLFORMULA_H
+#ifndef QXLSX_CELLFORMULA_H
+#define QXLSX_CELLFORMULA_H
 
 #include "xlsxformula.h"
 #include "xlsxglobal.h"
@@ -78,4 +78,4 @@ private:
 
 QT_END_NAMESPACE_XLSX
 
-#endif // QXLSX_XLSXCELLFORMULA_H
+#endif // QXLSX_CELLFORMULA_H

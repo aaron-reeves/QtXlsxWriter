@@ -186,4 +186,4 @@ bool Relationships::isEmpty() const
     return m_relationships.isEmpty();
 }
 
-} //namespace
+} // namespace QXlsx

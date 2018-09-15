@@ -53,4 +53,4 @@ bool SimpleOOXmlFile::loadFromXmlFile(QIODevice *device)
     return true;
 }
 
-}
+} // namespace QXlsx

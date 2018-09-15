@@ -397,4 +397,4 @@ bool SharedStrings::loadFromXmlFile(QIODevice *device)
     return true;
 }
 
-} //namespace
+} // namespace QXlsx

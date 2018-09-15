@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXABSTRACTSHEET_P_H
-#define XLSXABSTRACTSHEET_P_H
+#ifndef QXLSX_ABSTRACTSHEET_P_H
+#define QXLSX_ABSTRACTSHEET_P_H
 
 //
 //  W A R N I N G
@@ -60,5 +60,6 @@ public:
     AbstractSheet::SheetType type;
 };
 
-}
-#endif // XLSXABSTRACTSHEET_P_H
+} // namespace QXlsx
+
+#endif // QXLSX_ABSTRACTSHEET_P_H

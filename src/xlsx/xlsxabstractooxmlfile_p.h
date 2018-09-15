@@ -23,8 +23,8 @@
 **
 ****************************************************************************/
 
-#ifndef XLSXOOXMLFILE_P_H
-#define XLSXOOXMLFILE_P_H
+#ifndef QXLSX_ABSTRACTOOXMLFILE_P_H
+#define QXLSX_ABSTRACTOOXMLFILE_P_H
 
 //
 //  W A R N I N G
@@ -61,4 +61,4 @@ public:
 
 QT_END_NAMESPACE_XLSX
 
-#endif // XLSXOOXMLFILE_P_H
+#endif // QXLSX_ABSTRACTOOXMLFILE_P_H

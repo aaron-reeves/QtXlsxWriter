@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXRICHSTRING_H
-#define XLSXRICHSTRING_H
+#ifndef QXLSX_RICHSTRING_H
+#define QXLSX_RICHSTRING_H
 
 #include "xlsxglobal.h"
 #include "xlsxformat.h"
@@ -86,4 +86,4 @@ QT_END_NAMESPACE_XLSX
 
 Q_DECLARE_METATYPE(QXlsx::RichString)
 
-#endif // XLSXRICHSTRING_H
+#endif // QXLSX_RICHSTRING_H
