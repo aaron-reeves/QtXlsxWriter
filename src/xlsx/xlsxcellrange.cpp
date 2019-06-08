@@ -24,6 +24,7 @@
 ****************************************************************************/
 #include "xlsxcellrange.h"
 #include "xlsxcellreference.h"
+#include "xlsxformula.h"
 #include <QString>
 #include <QPoint>
 #include <QStringList>
@@ -44,7 +45,7 @@ QT_BEGIN_NAMESPACE_XLSX
     whose rowCount() and columnCount() are 0.
 */
 CellRange::CellRange()
-    : top(-1), left(-1), bottom(-2), right(-2)
+    : top(-1), left(-1), bottom(-2), right(-2), _sheet()
 {
 }
 
@@ -54,15 +55,19 @@ CellRange::CellRange()
 
     \sa topRow(), leftColumn(), bottomRow(), rightColumn()
 */
-CellRange::CellRange(int top, int left, int bottom, int right)
-    : top(top), left(left), bottom(bottom), right(right)
+CellRange::CellRange(int top, int left, int bottom, int right, const QString &sheet)
+    : top(top), left(left), bottom(bottom), right(right), _sheet(sheet)
 {
 }
 
 CellRange::CellRange(const CellReference &topLeft, const CellReference &bottomRight)
     : top(topLeft.row()), left(topLeft.column()), 
-      bottom(bottomRight.row()), right(bottomRight.column())
+      bottom(bottomRight.row()), right(bottomRight.column()),
+      _sheet()
 {
+    if (topLeft.sheet() == bottomRight.sheet()) {
+        _sheet = topLeft.sheet();
+    }
 }
 
 /*!
@@ -85,7 +90,17 @@ CellRange::CellRange(const char *range)
 
 void CellRange::init(const QString &range)
 {
-    QStringList rs = range.split(QLatin1Char(':'));
+    // TODO can be range from one sheet to another, ex: "Sheet1:Sheet4!A1:A5" or "Sheet1:Sheet4!A1"
+    // TODO can be '!' or ':' symbol in sheet name
+    QStringList sp = range.split(QLatin1Char('!'));
+    QString cellRange = range;
+    if (sp.size() > 1) {
+        _sheet = sp.front();
+        if (_sheet.startsWith(QLatin1String("'")) && _sheet.endsWith(QLatin1String("'")))
+            _sheet = _sheet.mid(2, _sheet.length() - 2);
+        cellRange = sp.back();
+    }
+    QStringList rs = cellRange.split(QLatin1Char(':'));
     if (rs.size() == 2) {
         CellReference start(rs[0]);
         CellReference end(rs[1]);
@@ -107,7 +122,7 @@ void CellRange::init(const QString &range)
     other range.
 */
 CellRange::CellRange(const CellRange &other)
-    : top(other.top), left(other.left), bottom(other.bottom), right(other.right)
+    : top(other.top), left(other.left), bottom(other.bottom), right(other.right), _sheet(other._sheet)
 {
 }
 
@@ -116,6 +131,21 @@ CellRange::CellRange(const CellRange &other)
 */
 CellRange::~CellRange()
 {
+}
+
+Formula CellRange::toFormula() const
+{
+    return Formula(*this);
+}
+
+Formula CellRange::toFormula(int firstRow, int firstColumn, int lastRow, int lastColumn, const QString &sheet)
+{
+    return CellRange(firstRow, firstColumn, lastRow, lastColumn, sheet).toFormula();
+}
+
+Formula CellRange::toFormula(const CellReference &topLeft, const CellReference &bottomRight)
+{
+    return CellRange(topLeft, bottomRight).toFormula();
 }
 
 /*!
@@ -128,18 +158,25 @@ QString CellRange::toString(bool row_abs, bool col_abs) const
 
     if (left == right && top == bottom) {
         //Single cell
-        return CellReference(top, left).toString(row_abs, col_abs);
+        return CellReference(top, left, _sheet).toString(row_abs, col_abs);
     }
 
+    QString sheet_name;
+    if (!_sheet.isEmpty())
+        sheet_name.append(QStringLiteral("'%1'!").arg(_sheet));
     QString cell_1 = CellReference(top, left).toString(row_abs, col_abs);
     QString cell_2 = CellReference(bottom, right).toString(row_abs, col_abs);
-    return cell_1 + QLatin1String(":") + cell_2;
+    return sheet_name + cell_1 + QLatin1String(":") + cell_2;
 }
 
-QString CellRange::toString(int firstRow, int firstColumn, int lastRow, int lastColumn)
+QString CellRange::toString(int firstRow, int firstColumn, int lastRow, int lastColumn, const QString &sheet)
 {
-    CellRange cellRange(firstRow, firstColumn, lastRow, lastColumn);
-    return cellRange.toString();
+    return CellRange(firstRow, firstColumn, lastRow, lastColumn, sheet).toString();
+}
+
+QString CellRange::toString(const CellReference &topLeft, const CellReference &bottomRight)
+{
+    return CellRange(topLeft, bottomRight).toString();
 }
 
 /*!

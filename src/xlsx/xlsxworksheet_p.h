@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXWORKSHEET_P_H
-#define XLSXWORKSHEET_P_H
+#ifndef QXLSX_WORKSHEET_P_H
+#define QXLSX_WORKSHEET_P_H
 
 //
 //  W A R N I N G
@@ -38,10 +38,8 @@
 
 #include "xlsxworksheet.h"
 #include "xlsxabstractsheet_p.h"
-#include "xlsxcell.h"
 #include "xlsxdatavalidation.h"
 #include "xlsxconditionalformatting.h"
-#include "xlsxcellformula.h"
 
 #include <QImage>
 #include <QSharedPointer>
@@ -229,5 +227,6 @@ private:
     static double calculateColWidth(int characters);
 };
 
-}
-#endif // XLSXWORKSHEET_P_H
+} // namespace QXlsx
+
+#endif // QXLSX_WORKSHEET_P_H

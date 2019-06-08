@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXRELATIONSHIPS_H
-#define XLSXRELATIONSHIPS_H
+#ifndef QXLSX_RELATIONSHIPS_H
+#define QXLSX_RELATIONSHIPS_H
 
 //
 //  W A R N I N G
@@ -83,5 +83,6 @@ private:
     QList<XlsxRelationship> m_relationships;
 };
 
-}
-#endif // XLSXRELATIONSHIPS_H
+} // namespace QXlsx
+
+#endif // QXLSX_RELATIONSHIPS_H

@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXCELLFORMULA_P_H
-#define XLSXCELLFORMULA_P_H
+#ifndef QXLSX_CELLFORMULA_P_H
+#define QXLSX_CELLFORMULA_P_H
 
 //
 //  W A R N I N G
@@ -61,4 +61,4 @@ public:
 
 QT_END_NAMESPACE_XLSX
 
-#endif // XLSXCELLFORMULA_P_H
+#endif // QXLSX_CELLFORMULA_P_H

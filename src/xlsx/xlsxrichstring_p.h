@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXRICHSTRING_P_H
-#define XLSXRICHSTRING_P_H
+#ifndef QXLSX_RICHSTRING_P_H
+#define QXLSX_RICHSTRING_P_H
 
 //
 //  W A R N I N G
@@ -57,4 +57,4 @@ public:
 
 QT_END_NAMESPACE_XLSX
 
-#endif // XLSXRICHSTRING_P_H
+#endif // QXLSX_RICHSTRING_P_H

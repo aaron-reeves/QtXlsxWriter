@@ -24,28 +24,37 @@
 ****************************************************************************/
 #ifndef QXLSX_XLSXCELLREFERENCE_H
 #define QXLSX_XLSXCELLREFERENCE_H
+
 #include "xlsxglobal.h"
 
+#include <QString>
+
 QT_BEGIN_NAMESPACE_XLSX
+
+class Formula;
 
 class Q_XLSX_EXPORT CellReference
 {
 public:
     CellReference();
-    CellReference(int row, int column);
+    CellReference(int row, int column, const QString &sheet = QString());
     CellReference(const QString &cell);
     CellReference(const char *cell);
     CellReference(const CellReference &other);
     ~CellReference();
 
+    Formula toFormula() const;
+    static Formula toFormula(int row, int column, const QString &sheet = QString());
     QString toString(bool row_abs=false, bool col_abs=false) const;
-    static QString toString(int row, int column);
+    static QString toString(int row, int column, const QString &sheet = QString());
     static CellReference fromString(const QString &cell);
     bool isValid() const;
     inline void setRow(int row) { _row = row; }
     inline void setColumn(int col) { _column = col; }
+    inline void setSheet(const QString &sheet) { _sheet = sheet; }
     inline int row() const { return _row; }
     inline int column() const { return _column; }
+    inline const QString &sheet() const { return _sheet; }
 
     inline bool operator ==(const CellReference &other) const
     {
@@ -58,6 +67,7 @@ public:
 private:
     void init(const QString &cell);
     int _row, _column;
+    QString _sheet;
 };
 
 QT_END_NAMESPACE_XLSX

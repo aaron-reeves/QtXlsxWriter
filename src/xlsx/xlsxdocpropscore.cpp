@@ -165,4 +165,4 @@ bool DocPropsCore::loadFromXmlFile(QIODevice *device)
     return true;
 }
 
-} //namespace
+} // namespace QXlsx

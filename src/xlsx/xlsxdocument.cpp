@@ -473,6 +473,18 @@ Chart *Document::insertChart(int row, int col, const QSize &size)
 }
 
 /*!
+ * Insert a \a validator to current active worksheet at the position \a row, \a column
+ * with the \a format
+ * Returns true if success.
+ */
+bool Document::insertValidator(int row, int col, const Validator &val, const Format &format)
+{
+    if (Worksheet *sheet = currentWorksheet())
+        return sheet->insertValidator(row, col, val, format);
+    return false;
+}
+
+/*!
   Merge a \a range of cells. The first cell should contain the data and the others should
   be blank. All cells will be applied the same style if a valid \a format is given.
   Returns true on success.

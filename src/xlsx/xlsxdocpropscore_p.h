@@ -22,8 +22,8 @@
 ** WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 **
 ****************************************************************************/
-#ifndef XLSXDOCPROPSCORE_H
-#define XLSXDOCPROPSCORE_H
+#ifndef QXLSX_DOCPROPSCORE_H
+#define QXLSX_DOCPROPSCORE_H
 
 //
 //  W A R N I N G
@@ -61,5 +61,6 @@ private:
     QMap<QString, QString> m_properties;
 };
 
-}
-#endif // XLSXDOCPROPSCORE_H
+} // namespace QXlsx
+
+#endif // QXLSX_DOCPROPSCORE_H
